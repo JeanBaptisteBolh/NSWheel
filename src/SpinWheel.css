@@ -1,0 +1,702 @@
+.app-container {
+  min-height: 100vh;
+  background: url('./assets/forestcity.jpg') no-repeat center center fixed;
+  background-size: cover;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.app-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 0;
+}
+
+.balaji-image {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 600px;
+  height: auto;
+  z-index: 100;
+  border-radius: 0;
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.7);
+  transition: transform 0.3s ease;
+}
+
+.balaji-image:hover {
+  transform: scale(1.02);
+}
+
+.main-content {
+  display: flex;
+  gap: 3rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.wheel-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.wheel-title {
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+  text-align: center;
+}
+
+.wheel-wrapper {
+  position: relative;
+  width: 700px;
+  height: 700px;
+  margin-bottom: 2rem;
+}
+
+.wheel-pointer {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  color: #fff;
+  z-index: 10;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+.wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3),
+              0 0 0 15px #fff,
+              0 0 0 20px #2c3e50;
+  will-change: transform;
+}
+
+.wheel-svg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.spin-button {
+  padding: 1.2rem 3rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.spin-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.spin-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.spin-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.simulate-win-button {
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.simulate-win-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+}
+
+/* Leaderboard */
+.leaderboard {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  min-width: 300px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.leaderboard h2 {
+  margin: 0 0 1.5rem 0;
+  color: #2c3e50;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 10px;
+  transition: transform 0.2s;
+}
+
+.leaderboard-item:hover {
+  transform: translateX(5px);
+}
+
+.leaderboard-item:first-child {
+  background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+  color: white;
+}
+
+.leaderboard-item:nth-child(2) {
+  background: linear-gradient(135deg, #e0e0e0 0%, #808080 100%);
+  color: white;
+}
+
+.leaderboard-item:nth-child(3) {
+  background: linear-gradient(135deg, #cd7f32 0%, #8b4513 100%);
+  color: white;
+}
+
+.player-rank {
+  font-weight: bold;
+  font-size: 1.2rem;
+  min-width: 40px;
+}
+
+.player-name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.player-score {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* Popup Styles */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+  padding: 2rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.popup-content {
+  background: white;
+  border-radius: 20px;
+  padding: 3rem;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.3s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  margin: auto;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.popup-content h2 {
+  margin: 0 0 1.5rem 0;
+  color: #2c3e50;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.close-popup {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-popup:hover {
+  color: #333;
+}
+
+.question-text {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+  text-align: center;
+  font-weight: 500;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.option-button {
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.option-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.challenge-text {
+  font-size: 1.2rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.challenge-detail {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #FF6B6B;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.complete-button {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.complete-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(17, 153, 142, 0.4);
+}
+
+.cancel-button {
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  background: #ddd;
+  color: #666;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.cancel-button:hover {
+  background: #ccc;
+}
+
+.bitcoin-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.bitcoin-button {
+  padding: 1rem 1.5rem;
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.bitcoin-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(240, 147, 251, 0.4);
+}
+
+/* Prize Popup Styles */
+.prize-title {
+  font-size: 2.5rem !important;
+  color: #f5576c;
+  text-align: center;
+  margin-bottom: 1.5rem !important;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.prize-message {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #667eea;
+  text-align: center;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.prize-subtext {
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.prize-claim-button {
+  width: 100%;
+  padding: 1.5rem 2rem;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+}
+
+.prize-claim-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(245, 87, 108, 0.6);
+}
+
+/* Share Buttons */
+.share-text {
+  font-size: 1.3rem;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.share-prompt {
+  font-size: 1.1rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.share-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.share-button {
+  padding: 1rem;
+  font-size: 1.1rem;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.share-icon {
+  font-size: 1.4rem;
+}
+
+.share-button.twitter {
+  background: linear-gradient(135deg, #1DA1F2 0%, #0d8bd9 100%);
+}
+
+.share-button.twitter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(29, 161, 242, 0.4);
+}
+
+.share-button.farcaster {
+  background: linear-gradient(135deg, #8465CB 0%, #6a4fb8 100%);
+}
+
+.share-button.farcaster:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(132, 101, 203, 0.4);
+}
+
+.share-button.facebook {
+  background: linear-gradient(135deg, #4267B2 0%, #365899 100%);
+}
+
+.share-button.facebook:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(66, 103, 178, 0.4);
+}
+
+.share-button.linkedin {
+  background: linear-gradient(135deg, #0077B5 0%, #005885 100%);
+}
+
+.share-button.linkedin:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 119, 181, 0.4);
+}
+
+.skip-button {
+  width: 100%;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  background: #ddd;
+  color: #666;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.skip-button:hover {
+  background: #ccc;
+}
+
+/* Custom Confetti Animations */
+.custom-confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -50px;
+  font-size: 30px;
+  animation: fall linear forwards;
+  opacity: 0.9;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.floating-images-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  overflow: hidden;
+}
+
+.floating-balaji {
+  position: absolute;
+  bottom: -100px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  animation: floatUp ease-out forwards;
+  box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+  object-fit: cover;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) rotate(360deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+  .wheel-wrapper {
+    width: 600px;
+    height: 600px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .main-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .leaderboard {
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .wheel-wrapper {
+    width: 550px;
+    height: 550px;
+  }
+}
+
+@media (max-width: 768px) {
+  .wheel-wrapper {
+    width: 450px;
+    height: 450px;
+  }
+  
+  .wheel-title {
+    font-size: 2rem;
+  }
+  
+  .spin-button {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+  }
+
+  .popup-content {
+    padding: 2rem;
+    max-width: 90%;
+  }
+
+  .popup-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .share-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .share-button {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .wheel-wrapper {
+    width: 320px;
+    height: 320px;
+  }
+
+  .app-container {
+    padding: 1rem;
+  }
+
+  .leaderboard {
+    padding: 1.5rem;
+  }
+
+  .wheel-title {
+    font-size: 1.5rem;
+  }
+
+  .popup-content {
+    padding: 1.5rem;
+  }
+
+  .balaji-image {
+    width: 300px;
+    bottom: 0;
+    left: 0;
+  }
+}
