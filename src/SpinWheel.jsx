@@ -113,7 +113,7 @@ const SpinWheel = () => {
       piece.textContent = images[Math.floor(Math.random() * images.length)]
       piece.style.left = Math.random() * 100 + '%'
       piece.style.animationDuration = (Math.random() * 2 + 2) + 's'
-      piece.style.fontSize = (Math.random() * 30 + 20) + 'px'
+      piece.style.fontSize = (Math.random() * 60 + 40) + 'px'
       container.appendChild(piece)
 
       setTimeout(() => {
