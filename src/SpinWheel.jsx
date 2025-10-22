@@ -15,15 +15,15 @@ const SpinWheel = () => {
   // Segments with variable angles - prize is smaller
   const segments = [
     { label: '50 Push-ups', color: '#FF4757', type: 'burn', angle: 38, challenge: '50 push-ups' },
-    { label: 'Earn $100', color: '#1E90FF', type: 'earn', angle: 38, challenge: 'invest' },
-    { label: 'NS Trivia', color: '#FFA502', type: 'learn', angle: 38, challenge: 'question1' },
+    { label: 'Buy ETH', color: '#1E90FF', type: 'earn', angle: 38, challenge: 'eth' },
+    { label: 'Smart Contracts', color: '#FFA502', type: 'learn', angle: 38, challenge: 'question1' },
     { label: 'Run 5K', color: '#FF6348', type: 'burn', angle: 38, challenge: 'run 5km' },
     { label: '🎁 PRIZE', color: '#FFD700', type: 'prize', angle: 18 }, // Smaller - Gold
-    { label: 'Course', color: '#FF7F50', type: 'learn', angle: 38, challenge: 'question2' },
+    { label: 'Charter Cities', color: '#FF7F50', type: 'learn', angle: 38, challenge: 'question2' },
     { label: '100 Burpees', color: '#EE5A6F', type: 'burn', angle: 38, challenge: '100 burpees' },
-    { label: 'Side Hustle', color: '#00A8FF', type: 'earn', angle: 38, challenge: 'invest' },
-    { label: 'New Skill', color: '#FF9F43', type: 'learn', angle: 38, challenge: 'question3' },
-    { label: 'Invest $500', color: '#4A90E2', type: 'earn', angle: 38, challenge: 'invest' },
+    { label: 'Stake SOL', color: '#00A8FF', type: 'earn', angle: 38, challenge: 'solana' },
+    { label: 'Learn DAOs', color: '#FF9F43', type: 'learn', angle: 38, challenge: 'question3' },
+    { label: 'Buy Bitcoin', color: '#4A90E2', type: 'earn', angle: 38, challenge: 'bitcoin' },
   ]
 
   const leaderboard = [
@@ -37,31 +37,31 @@ const SpinWheel = () => {
   const questions = [
     {
       id: 'question1',
-      question: 'What is Network School?',
+      question: 'What are Smart Contracts?',
       options: [
-        'A networking school',
-        'A community of builders and entrepreneurs',
-        'An online course'
+        'Digital legal documents',
+        'Self-executing contracts with code on blockchain',
+        'AI-powered agreements'
       ],
       correct: 1
     },
     {
       id: 'question2',
-      question: 'What is the main focus of Network School?',
+      question: 'What is a Charter City?',
       options: [
-        'Academic theory',
-        'Learning by doing and building',
-        'Only networking'
+        'A historical city with a charter',
+        'A new city with special governance and regulations',
+        'A city that rents boats'
       ],
       correct: 1
     },
     {
       id: 'question3',
-      question: 'What do NS students learn?',
+      question: 'What is a DAO?',
       options: [
-        'Only programming',
-        'Technical and business skills',
-        'Only design'
+        'Digital Asset Organization',
+        'Decentralized Autonomous Organization',
+        'Data Analysis Office'
       ],
       correct: 1
     }
@@ -233,10 +233,15 @@ const SpinWheel = () => {
     setShowShareOptions(true)
   }
 
-  const handleBitcoinPurchase = (amount) => {
+  const handleCryptoInvestment = (crypto, amount) => {
+    const cryptoNames = {
+      bitcoin: 'Bitcoin',
+      eth: 'Ethereum',
+      solana: 'Solana'
+    }
     setCompletedChallenge({
       type: 'earn',
-      message: `Invested $${amount} in Bitcoin!`
+      message: `Invested $${amount} in ${cryptoNames[crypto]}!`
     })
     setShowShareOptions(true)
   }
@@ -251,9 +256,9 @@ const SpinWheel = () => {
 
   const handleShare = (platform) => {
     const messages = {
-      learn: `🎓 Just answered a Network School trivia question correctly on the Burn, Earn, Learn Wheel! #NetworkSchool #Learning`,
+      learn: `🎓 Just learned about ${currentChallenge.label} on the Burn, Earn, Learn Wheel! #Web3 #Learning #Crypto`,
       burn: `💪 Just completed a fitness challenge: ${currentChallenge.challenge}! #BurnEarnLearn #Fitness`,
-      earn: `💰 ${completedChallenge.message} #BurnEarnLearn #Investing`,
+      earn: `💰 ${completedChallenge.message} #BurnEarnLearn #Crypto #Web3`,
       prize: `🎉 I WON ONE MONTH AT NETWORK SCHOOL! 🎉 #NetworkSchool #Winner #BurnEarnLearn`
     }
 
@@ -412,17 +417,21 @@ const SpinWheel = () => {
 
             {currentChallenge.type === 'earn' && !showShareOptions && (
               <>
-                <h2>💰 Investment Opportunity</h2>
-                <p className="challenge-text">Invest in simulated Bitcoin!</p>
+                <h2>💰 Crypto Investment</h2>
+                <p className="challenge-text">
+                  {currentChallenge.challenge === 'bitcoin' && 'Invest in Bitcoin - Digital Gold! 🪙'}
+                  {currentChallenge.challenge === 'eth' && 'Invest in Ethereum - Smart Contract Platform! ⚡'}
+                  {currentChallenge.challenge === 'solana' && 'Stake Solana - High-Speed Blockchain! 🚀'}
+                </p>
                 <div className="bitcoin-options">
-                  <button className="bitcoin-button" onClick={() => handleBitcoinPurchase(100)}>
-                    Buy $100
+                  <button className="bitcoin-button" onClick={() => handleCryptoInvestment(currentChallenge.challenge, 100)}>
+                    Invest $100
                   </button>
-                  <button className="bitcoin-button" onClick={() => handleBitcoinPurchase(500)}>
-                    Buy $500
+                  <button className="bitcoin-button" onClick={() => handleCryptoInvestment(currentChallenge.challenge, 500)}>
+                    Invest $500
                   </button>
-                  <button className="bitcoin-button" onClick={() => handleBitcoinPurchase(1000)}>
-                    Buy $1000
+                  <button className="bitcoin-button" onClick={() => handleCryptoInvestment(currentChallenge.challenge, 1000)}>
+                    Invest $1000
                   </button>
                 </div>
                 <button className="cancel-button" onClick={handlePopupClose}>
